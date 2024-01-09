@@ -15,25 +15,15 @@ public class Main {
             dataPoints[i] = (int)(Math.random() * 100) + 1;
         }
 
-        for(int i = 0; i < dataPoints.length; i++){
-            totalVal += dataPoints[i];
-        }
+        totalVal = sum(dataPoints);
 
         for(int i = 0; i < dataPoints.length; i++){
             valAvrg = totalVal / dataPoints.length;
         }
 
-        for(int i = 0; i < dataPoints.length; i++){
-            if(dataPoints[i] > maxVal){
-                maxVal = dataPoints[i];
-            }
-        }
+        maxVal = max(dataPoints);
 
-        for(int i = 0; i < dataPoints.length; i++){
-            if(dataPoints[i] <= minVal){
-                minVal = dataPoints[i];
-            }
-        }
+        minVal = min(dataPoints);
 
         for(int i = 0; i < dataPoints.length; i++){
             System.out.print(dataPoints[i] + " | ");
@@ -49,11 +39,7 @@ public class Main {
         userVal = getRangedInt(scan, "Enter a value you would like to find: ", 1,100);
 
 
-        for(int i = 0; i < dataPoints.length; i++){
-            if(userVal == dataPoints[i]){
-                valTimes++;
-            }
-        }
+        valTimes = occuranceScan(dataPoints, userVal);
         System.out.println("Your value was used "+ valTimes + " times. ");
 
         for(int i = 0; i < dataPoints.length; i++){
@@ -69,6 +55,48 @@ public class Main {
         }
     }
 
+    public static int sum(int[] values){
+        int totalVal = 0;
+        for(int i = 0; i < values.length; i++){
+            totalVal += values[i];
+        }
+        return totalVal;
+    }
+
+    public static int occuranceScan(int[] values, int target){
+        int valTimes = 0;
+
+        for(int i = 0; i < values.length; i++){
+            if(target == values[i]){
+                valTimes++;
+            }
+        }
+        return valTimes;
+    }
+
+    public static int min(int[] values){
+        int min = 100;
+
+        for(int i = 0; i < values.length; i++){
+            if(values[i] <= min){
+                min = values[i];
+            }
+        }
+
+        return min;
+    }
+
+    public static int max(int[] values){
+        int max = 0;
+
+        for(int i = 0; i < values.length; i++){
+            if(values[i] > max){
+                max = values[i];
+            }
+        }
+
+        return max;
+    }
     public static int getRangedInt(Scanner in, String prompt, int min, int max){
         boolean done = false;
         int x = 0;
